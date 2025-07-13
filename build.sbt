@@ -38,7 +38,15 @@ lazy val jvmProjects: Seq[ProjectReference] = Seq(
   cli
 )
 
-lazy val jsProjects: Seq[ProjectReference] = Seq(api.js, client.js, lang.js, ui, uiMain, playground, sdkJs)
+lazy val jsProjects: Seq[ProjectReference] = Seq(
+  api.js,
+  client.js,
+  lang.js,
+  ui,
+  uiMain,
+  playground,
+  sdkJs
+)
 
 lazy val nativeProjects: Seq[ProjectReference] = Seq(api.native, lang.native, wvc, wvcLib)
 
@@ -345,7 +353,7 @@ lazy val runner = project
       Seq(
         "org.jline"                     % "jline"             % "3.30.4",
         "org.wvlet.airframe"           %% "airframe-launcher" % AIRFRAME_VERSION,
-        "com.github.ben-manes.caffeine" % "caffeine"          % "3.2.1",
+        "com.github.ben-manes.caffeine" % "caffeine"          % "3.2.2",
         "org.apache.arrow"              % "arrow-vector"      % "18.3.0",
         "org.duckdb"                    % "duckdb_jdbc"       % "1.3.1.0",
         "io.trino"                      % "trino-jdbc"        % TRINO_VERSION,
@@ -382,11 +390,13 @@ lazy val sdkJs = project
     buildSettings,
     name := "wvlet-sdk-js",
     // Configure Scala.js output as ES module
-    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    scalaJSLinkerConfig ~= {
+      _.withModuleKind(ModuleKind.ESModule)
+    },
     // Configure output directory
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib"
   )
   .dependsOn(lang.js)
