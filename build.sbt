@@ -1,7 +1,7 @@
 import scala.scalanative.build.{BuildTarget, GC, Mode}
 
-val AIRFRAME_VERSION    = "2025.1.14"
-val AIRSPEC_VERSION     = "2025.1.14"
+val AIRFRAME_VERSION    = "2025.1.16"
+val AIRSPEC_VERSION     = "2025.1.16"
 val TRINO_VERSION       = "476"
 val AWS_SDK_VERSION     = "2.20.146"
 val SCALAJS_DOM_VERSION = "2.8.0"
@@ -38,7 +38,15 @@ lazy val jvmProjects: Seq[ProjectReference] = Seq(
   cli
 )
 
-lazy val jsProjects: Seq[ProjectReference] = Seq(api.js, client.js, lang.js, ui, uiMain, playground, sdkJs)
+lazy val jsProjects: Seq[ProjectReference] = Seq(
+  api.js,
+  client.js,
+  lang.js,
+  ui,
+  uiMain,
+  playground,
+  sdkJs
+)
 
 lazy val nativeProjects: Seq[ProjectReference] = Seq(api.native, lang.native, wvc, wvcLib)
 
@@ -382,11 +390,13 @@ lazy val sdkJs = project
     buildSettings,
     name := "wvlet-sdk-js",
     // Configure Scala.js output as ES module
-    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    scalaJSLinkerConfig ~= {
+      _.withModuleKind(ModuleKind.ESModule)
+    },
     // Configure output directory
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib"
   )
   .dependsOn(lang.js)
