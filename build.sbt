@@ -38,7 +38,15 @@ lazy val jvmProjects: Seq[ProjectReference] = Seq(
   cli
 )
 
-lazy val jsProjects: Seq[ProjectReference] = Seq(api.js, client.js, lang.js, ui, uiMain, playground, sdkJs)
+lazy val jsProjects: Seq[ProjectReference] = Seq(
+  api.js,
+  client.js,
+  lang.js,
+  ui,
+  uiMain,
+  playground,
+  sdkJs
+)
 
 lazy val nativeProjects: Seq[ProjectReference] = Seq(api.native, lang.native, wvc, wvcLib)
 
@@ -382,11 +390,13 @@ lazy val sdkJs = project
     buildSettings,
     name := "wvlet-sdk-js",
     // Configure Scala.js output as ES module
-    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    scalaJSLinkerConfig ~= {
+      _.withModuleKind(ModuleKind.ESModule)
+    },
     // Configure output directory
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := 
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory :=
       (ThisBuild / baseDirectory).value / "sdks" / "typescript" / "lib"
   )
   .dependsOn(lang.js)
@@ -480,7 +490,7 @@ def uiSettings: Seq[Setting[?]] = Seq(
 
 def linkerConfig(config: StandardConfig): StandardConfig = {
   config
-    // Check IR works properly since Scala.js 1.19.0 https://github.com/scala-js/scala-js/pull/4867
+    // Check IR works properly since Scala.js 1.20.1 https://github.com/scala-js/scala-js/pull/4867
     .withCheckIR(true)
     .withSourceMap(true)
     .withModuleKind(ModuleKind.ESModule)
