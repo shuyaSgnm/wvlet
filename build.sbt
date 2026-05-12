@@ -438,7 +438,7 @@ lazy val server = project
     libraryDependencies ++=
       Seq(
         // For redirecting slf4j logs to airframe-log
-        "org.slf4j"           % "slf4j-jdk14"         % "2.0.17",
+        "org.slf4j"           % "slf4j-jdk14"         % "2.0.18",
         "org.wvlet.airframe" %% "airframe-launcher"   % AIRFRAME_VERSION,
         "org.wvlet.airframe" %% "airframe-http-netty" % AIRFRAME_VERSION
       ),
