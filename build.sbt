@@ -673,7 +673,7 @@ def uiSettings: Seq[Setting[?]] = Seq(
 
 def linkerConfig(config: StandardConfig): StandardConfig = {
   config
-    // Check IR works properly since Scala.js 1.22.0 https://github.com/scala-js/scala-js/pull/4867
+    // Check IR works properly since Scala.js 1.23.0 https://github.com/scala-js/scala-js/pull/4867
     .withCheckIR(true)
     .withSourceMap(true)
     .withModuleKind(ModuleKind.ESModule)
