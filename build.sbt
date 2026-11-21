@@ -457,7 +457,7 @@ lazy val runner = project
     libraryDependencies ++=
       Seq(
         "org.jline"        % "jline"        % "4.3.1",
-        "org.apache.arrow" % "arrow-vector" % "19.0.0",
+        "org.apache.arrow" % "arrow-vector" % "20.0.0",
         // SQLite-backed flow run store (cross-process cancellation and concurrency claims)
         "org.xerial" % "sqlite-jdbc" % "3.53.2.1",
         // trino-jdbc removed in PR-D: TrinoConnector now talks the Trino REST protocol via uni's
